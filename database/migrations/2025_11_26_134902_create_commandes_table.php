@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->float('total');
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
