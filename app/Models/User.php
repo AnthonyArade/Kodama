@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -44,5 +47,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+        public function canAccessPanel(Panel $panel): bool
+    {
+        // Only allow access for the 'admin' panel when gate allows it
+        if ($panel->getId() === 'admin') {
+            return Gate::allows('access-admin'); // uses your Gate from AppServiceProvider
+            return $this->is_admin === 1;
+        }
+        // Allow other panels by default (adjust as needed)
+        return true;
     }
 }
