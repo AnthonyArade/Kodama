@@ -4,12 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Livre;
+use App\Models\Commande;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -59,5 +60,15 @@ class User extends Authenticatable
         }
         // Allow other panels by default (adjust as needed)
         return true;
+    }
+    public function commande()
+    {
+        return $this->belongsTo(Commande::class);
+    }
+    public function livre()
+    {
+        return $this->belongsToMany(Livre::class, 'panier', 'livre_id', 'user_id')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }
