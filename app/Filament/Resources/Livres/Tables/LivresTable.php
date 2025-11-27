@@ -16,17 +16,19 @@ class LivresTable
     {
         return $table
             ->columns([
-                TextColumn::make('category_id')
+                TextColumn::make('category.nom')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('nom')
+                    ->label('Nom du livre')
                     ->searchable(),
                 TextColumn::make('auteur')
                     ->searchable(),
                 ImageColumn::make('image'),
                 TextColumn::make('prix')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('date_sortie')
                     ->date()
                     ->sortable(),
@@ -35,9 +37,11 @@ class LivresTable
                     ->sortable(),
                 TextColumn::make('like')
                     ->numeric()
+                    ->label('Like')
                     ->sortable(),
                 TextColumn::make('unlike')
                     ->numeric()
+                    ->label('Dislike')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

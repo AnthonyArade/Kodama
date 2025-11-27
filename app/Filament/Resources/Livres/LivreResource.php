@@ -20,7 +20,7 @@ class LivreResource extends Resource
 {
     protected static ?string $model = Livre::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
 
     protected static ?string $recordTitleAttribute = 'Livre';
 

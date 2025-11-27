@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Livres\Schemas;
 
+use App\Models\Category;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Schemas\Schema;
 
 class LivreForm
 {
@@ -14,9 +16,14 @@ class LivreForm
     {
         return $schema
             ->components([
-                TextInput::make('category_id')
+                Select::make('category_id')
                     ->required()
-                    ->numeric(),
+                    ->options(
+                        Category::query()
+                            ->pluck('nom', 'id')
+                            ->toArray()
+                    )
+                    ->label('Category'),
                 TextInput::make('nom')
                     ->required(),
                 TextInput::make('auteur')

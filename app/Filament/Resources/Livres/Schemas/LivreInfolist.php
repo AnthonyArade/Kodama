@@ -12,8 +12,8 @@ class LivreInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('category_id')
-                    ->numeric(),
+                TextEntry::make('category.nom')
+                ->label('Category'),
                 TextEntry::make('nom'),
                 TextEntry::make('auteur'),
                 TextEntry::make('description')

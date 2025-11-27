@@ -21,7 +21,7 @@ class CommandeResource extends Resource
 {
     protected static ?string $model = Commande::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Banknotes;
 
     protected static ?string $recordTitleAttribute = 'Commande';
 
