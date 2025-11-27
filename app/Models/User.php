@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Livre;
+use App\Models\Commande;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -49,14 +51,23 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-        public function canAccessPanel(Panel $panel): bool
+    public function canAccessPanel(Panel $panel): bool
     {
         // Only allow access for the 'admin' panel when gate allows it
         if ($panel->getId() === 'admin') {
             return Gate::allows('access-admin'); // uses your Gate from AppServiceProvider
-            return $this->is_admin === 1;
         }
         // Allow other panels by default (adjust as needed)
         return true;
+    }
+    public function commande()
+    {
+        return $this->belongsTo(Commande::class);
+    }
+    public function livre()
+    {
+        return $this->belongsToMany(Livre::class, 'panier', 'livre_id', 'user_id')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }
