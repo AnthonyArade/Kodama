@@ -2,19 +2,20 @@
 
 namespace App\Filament\Resources\Commandes;
 
-use App\Filament\Resources\Commandes\Pages\CreateCommande;
-use App\Filament\Resources\Commandes\Pages\EditCommande;
-use App\Filament\Resources\Commandes\Pages\ListCommandes;
-use App\Filament\Resources\Commandes\Pages\ViewCommande;
-use App\Filament\Resources\Commandes\Schemas\CommandeForm;
-use App\Filament\Resources\Commandes\Schemas\CommandeInfolist;
-use App\Filament\Resources\Commandes\Tables\CommandesTable;
-use App\Models\Commande;
 use BackedEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+use App\Models\Commande;
 use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
+use App\Filament\Resources\Commandes\Pages\EditCommande;
+use App\Filament\Resources\Commandes\Pages\ViewCommande;
+use App\Filament\Resources\Commandes\Pages\ListCommandes;
+use App\Filament\Resources\Commandes\Pages\CreateCommande;
+use App\Filament\Resources\Commandes\Schemas\CommandeForm;
+use App\Filament\Resources\Commandes\Tables\CommandesTable;
+use App\Filament\Resources\Commandes\Schemas\CommandeInfolist;
+use App\Filament\Resources\Commandes\RelationManagers\LigneRelationManager;
 
 class CommandeResource extends Resource
 {
@@ -23,6 +24,8 @@ class CommandeResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Commande';
+
+    
 
     public static function form(Schema $schema): Schema
     {
@@ -42,7 +45,7 @@ class CommandeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            LigneRelationManager::class,
         ];
     }
 
