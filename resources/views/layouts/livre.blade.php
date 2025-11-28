@@ -16,7 +16,18 @@
 
 <x-header/>
 
+<!-- Hero Section -->
+<section class="secondary-color py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+            @yield('hero-section')
+        </div>
+    </div>
+</section>
+
 @yield('content')
+
+<x-footer/>
 
     </body>
 </html>
