@@ -16,7 +16,7 @@ class LivreController extends Controller
     {
         //
         $livres = Livre::all();
-        return view('index', compact('livres'));
+        return view('livre.index', compact('livres'));
     }
 
     public function byCategory($category)
