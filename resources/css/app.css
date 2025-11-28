@@ -1,3 +1,336 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.heading-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Custom colors based on your hex codes */
+.primary-color {
+    background-color: #488253;
+}
+
+.secondary-color {
+    background-color: #F6D199;
+}
+
+.third-color {
+    background-color: #193026;
+}
+
+.text-primary {
+    color: #488253;
+}
+
+.text-secondary {
+    color: #F6D199;
+}
+
+.text-third {
+    color: #193026;
+}
+
+.border-primary {
+    border-color: #488253;
+}
+
+.border-secondary {
+    border-color: #F6D199;
+}
+
+.border-third {
+    border-color: #193026;
+}
+
+/* Kodama logo styling - tree spirit concept */
+.kodama-logo {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: #488253;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-icon::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #F6D199;
+    border-radius: 50%;
+    top: -5px;
+    left: -5px;
+}
+
+.logo-icon::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #193026;
+    border-radius: 50%;
+    bottom: -3px;
+    right: -3px;
+}
+
+/* Custom button styles */
+.btn-primary {
+    background-color: #488253;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3a6a43;
+}
+
+.btn-secondary {
+    background-color: #F6D199;
+    color: #193026;
+}
+
+.btn-secondary:hover {
+    background-color: #f0c07c;
+}
+
+.btn-outline {
+    border: 2px solid #193026;
+    color: #193026;
+}
+
+.btn-outline:hover {
+    background-color: #193026;
+    color: white;
+}
+
+/* Breadcrumb styling */
+.breadcrumb-item:not(:last-child):after {
+    content: ">";
+    margin: 0 8px;
+    color: #6b7280;
+}
+
+/* Quantity input styling */
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* Cart item hover effect */
+.cart-item:hover {
+    background-color: #f9fafb;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.mobile-dropdown {
+    position: relative;
+}
+
+.dropdown button {
+    cursor: pointer;
+}
+
+.mobile-dropdown button {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+
+/* Dropdown menu styling */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    z-index: 50;
+    padding: 8px 0;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    color: #193026;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #488253;
+}
+
+/* Cart badge styling */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #dc2626;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Cart icon hover effect */
+.cart-icon:hover {
+    background-color: #193026;
+}
+
+.cart-icon:hover svg {
+    stroke: white;
+}
+
+.cart-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+    padding: 1rem 0;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu-item {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #4B5563;
+    transition: all 0.2s;
+}
+
+.mobile-menu-item:hover {
+    background-color: #F3F4F6;
+    color: #1F2937;
+}
+
+.mobile-dropdown-menu {
+    display: none;
+    padding-left: 1.5rem;
+}
+
+.mobile-dropdown-menu.active {
+    display: block;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+        position: relative;
+    z-index: 40;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #374151;
+    margin-bottom: 4px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.mobile-menu,
+.dropdown-menu,
+.hamburger span {
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Media query for mobile menu */
+@media (max-width: 770px) {
+    .hamburger {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .sign-in-btn {
+        display: none;
+    }
+
+    .mobile-sign-in {
+        display: block !important;
+    }
+
+    .mobile-sign-in .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 771px) {
+    .mobile-sign-in {
+        display: none;
+    }
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
