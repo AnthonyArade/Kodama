@@ -14,9 +14,9 @@ class LivreController extends Controller
      */
     public function index()
     {
-        //
         $livres = Livre::all();
-        return view('livre.index', compact('livres'));
+        $featuredLivre = Livre::orderBy('date_sortie', 'desc')->take(4)->get();
+        return view('livre.index', compact('livres , featuredLivre'));
     }
 
     public function byCategory($category)
