@@ -16,7 +16,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'nom' => $this->faker->unique()->randomElement([
+            'nom'  => $this->faker->unique()->randomElement([
                 'Science Fiction',
                 'Fantasy',
                 'Romance',
@@ -30,6 +30,24 @@ class CategoryFactory extends Factory
                 'Adventure',
                 'Classics',
             ]),
+            'icon' => function (array $attributes) {
+                $icons = [
+                    'Science Fiction' => '🚀',
+                    'Fantasy'         => '🧙‍♂️',
+                    'Romance'         => '❤️',
+                    'Mystery'         => '🕵️‍♀️',
+                    'Thriller'        => '🔪',
+                    'Biography'       => '👤',
+                    'Self-Help'       => '💡',
+                    'History'         => '🏺',
+                    'Philosophy'      => '🤔',
+                    'Horror'          => '👻',
+                    'Adventure'       => '🗺️',
+                    'Classics'        => '📜',
+                ];
+
+                return $icons[$attributes['nom']];
+            },
         ];
     }
 }
