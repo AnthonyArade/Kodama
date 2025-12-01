@@ -42,14 +42,16 @@
                 {{-- creer moi une boucle foreach pour afficher les featuredcard --}}
                 @foreach ($featuredLivres as $featuredLivre)
                     <div
-                        class="book-card flex flex-col justify-around bg-white rounded-lg shadow-md overflow-hidden transition-all">
+                        class="book-card flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-all h-full">
                         <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
                             <img src="{{ $featuredLivre->image }}" alt="Image du livre" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 flex flex-col flex-1">
                             <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
                             <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
-                            <div class="flex justify-between items-center">
+
+                            <!-- This will now stick to the bottom -->
+                            <div class="flex mt-auto justify-between items-center">
                                 <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
                                 <button class="btn-primary px-4 py-2 rounded text-sm transition-colors">
                                     Add to Cart
