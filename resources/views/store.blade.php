@@ -199,25 +199,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Newsletter Section -->
-    <section class="py-16 primary-color text-white mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold heading-font mb-4">Join Our Reading Community</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for book recommendations, author events,
-                and exclusive discounts.</p>
-
-            <div class="max-w-md mx-auto flex">
-                <input type="email" placeholder="Your email address"
-                    class="flex-grow px-4 py-3 rounded-l-md focus:outline-none text-third">
-                <button class="btn-secondary font-medium px-6 py-3 rounded-r-md transition-colors">
-                    Subscribe
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
-
 @endsection
