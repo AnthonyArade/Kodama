@@ -23,7 +23,7 @@ class LivreController extends Controller
     public function store()
     {
         $categories = Category::all();
-        $livres = Livre::all()->paginate(12);
+        $livres = Livre::paginate(12); // Changé ici
         return view('store', compact('livres', 'categories'));
     }
 

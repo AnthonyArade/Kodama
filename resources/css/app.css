@@ -299,6 +299,156 @@ body {
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.heading-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Custom colors based on your hex codes */
+.primary-color { background-color: #488253; }
+.secondary-color { background-color: #F6D199; }
+.third-color { background-color: #193026; }
+
+.text-primary { color: #488253; }
+.text-secondary { color: #F6D199; }
+.text-third { color: #193026; }
+
+.border-primary { border-color: #488253; }
+.border-secondary { border-color: #F6D199; }
+.border-third { border-color: #193026; }
+
+/* Kodama logo styling - tree spirit concept */
+.kodama-logo {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: #488253;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-icon::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #F6D199;
+    border-radius: 50%;
+    top: -5px;
+    left: -5px;
+}
+
+.logo-icon::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #193026;
+    border-radius: 50%;
+    bottom: -3px;
+    right: -3px;
+}
+
+/* Hover effects */
+.book-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* Custom button styles */
+.btn-primary {
+    background-color: #488253;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3a6a43;
+}
+
+.btn-secondary {
+    background-color: #F6D199;
+    color: #193026;
+}
+
+.btn-secondary:hover {
+    background-color: #f0c07c;
+}
+
+.btn-outline {
+    border: 2px solid #193026;
+    color: #193026;
+}
+
+.btn-outline:hover {
+    background-color: #193026;
+    color: white;
+}
+
+/* Breadcrumb styling */
+.breadcrumb-item:not(:last-child):after {
+    content: ">";
+    margin: 0 8px;
+    color: #6b7280;
+}
+
+/* Checkbox styling */
+input[type="checkbox"]:checked {
+    background-color: #488253;
+    border-color: #488253;
+}
+
+/* Price range slider */
+input[type="range"]::-webkit-slider-thumb {
+    background: #488253;
+}
+
+input[type="range"]::-moz-range-thumb {
+    background: #488253;
+}
+
+/* Pagination */
+.pagination-active {
+    background-color: #488253;
+    color: white;
+}
+
+/* Like/Dislike styling */
+.like-dislike-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.like-count, .dislike-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.like-count svg, .dislike-count svg {
+    width: 16px;
+    height: 16px;
+}
+
+.like-count {
+    color: #488253;
+}
+
+.dislike-count {
+    color: #dc2626;
+}
 
 /* Media query for mobile menu */
 @media (max-width: 770px) {
