@@ -3,9 +3,12 @@
 @section('title', 'Boutique')
 
 @section('hero-section')
-    <h1 class="text-5xl font-bold heading-font text-third mb-6">Your Shopping Cart</h1>
-    <p class="text-xl text-third max-w-2xl mx-auto">Review your selected books and proceed to checkout. Your next great read
-        is just a click away!</p>
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold heading-font text-third mb-6">Your Shopping Cart</h1>
+        <p class="text-xl text-third max-w-2xl mx-auto">Review your selected books and proceed to checkout. Your next great
+            read
+            is just a click away!</p>
+    </div>
 @endsection
 
 @section('content')
@@ -19,125 +22,71 @@
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold heading-font">Cart Items</h2>
-                            <span class="text-gray-600">3 items</span>
+                            <span class="text-gray-600">{{ $cart->count() }} item(s)</span>
                         </div>
-
                         <!-- Cart Items List -->
                         <div class="space-y-6">
                             <!-- Cart Item 1 -->
-                            <div
-                                class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
-                                <div class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
-                                    <div class="text-2xl text-white">📖</div>
-                                </div>
-                                <div class="flex-grow">
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <h3 class="font-bold text-lg">The Forest's Whisper</h3>
-                                            <p class="text-gray-600">by Elena Rivers</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <p class="font-bold text-primary text-lg">$19.99</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-4">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-gray-600">Quantity:</span>
-                                            <div class="flex items-center border border-gray-300 rounded">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
-                                                <input type="text" value="1" class="quantity-input">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
-                                            </div>
-                                        </div>
-                                        <button
-                                            class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Cart Item 2 -->
-                            <div
-                                class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
+                            @foreach ($cart as $cartItem)
                                 <div
-                                    class="w-24 h-32 secondary-color rounded flex items-center justify-center flex-shrink-0">
-                                    <div class="text-2xl text-third">🌙</div>
-                                </div>
-                                <div class="flex-grow">
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <h3 class="font-bold text-lg">Moonlight Sonata</h3>
-                                            <p class="text-gray-600">by Michael Chen</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <p class="font-bold text-primary text-lg">$16.99</p>
-                                        </div>
+                                    class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
+                                    <div
+                                        class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
+                                        <div class="text-2xl text-white">📖</div>
                                     </div>
-                                    <div class="flex items-center justify-between mt-4">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-gray-600">Quantity:</span>
-                                            <div class="flex items-center border border-gray-300 rounded">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
-                                                <input type="text" value="1" class="quantity-input">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                    <div class="flex-grow">
+                                        <div class="flex justify-between">
+                                            <div>
+                                                <h3 class="font-bold text-lg">{{ $cartItem->livre->nom }}</h3>
+                                                <p class="text-gray-600">{{ $cartItem->livre->auteur }}</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="font-bold text-primary text-lg">{{ $cartItem->livre->prix }}€</p>
                                             </div>
                                         </div>
-                                        <button
-                                            class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="flex items-center justify-between mt-4">
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-gray-600">Quantité : </span>
+                                                <div class="flex items-center border border-gray-300 rounded">
+                                                    <form method="POST"
+                                                        action="{{ route('panier.decrement', $cartItem->id) }}"
+                                                        class="inline">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                                    </form>
 
-                            <!-- Cart Item 3 -->
-                            <div
-                                class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
-                                <div class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
-                                    <div class="text-2xl text-white">🚀</div>
-                                </div>
-                                <div class="flex-grow">
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <h3 class="font-bold text-lg">Beyond the Stars</h3>
-                                            <p class="text-gray-600">by Alex Johnson</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <p class="font-bold text-primary text-lg">$22.99</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-4">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-gray-600">Quantity:</span>
-                                            <div class="flex items-center border border-gray-300 rounded">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
-                                                <input type="text" value="1" class="quantity-input">
-                                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                                    <span class="quantity-input px-3 py-1">{{ $cartItem->quantite }}</span>
+
+                                                    <form method="POST"
+                                                        action="{{ route('panier.increment', $cartItem->id) }}"
+                                                        class="inline">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <form method="POST" action="{{ route('panier.destroy', $cartItem->id) }}"
+                                                class="inline"
+                                                onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                    Remove
+                                                </button>
+                                            </form>
                                         </div>
-                                        <button
-                                            class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                            Remove
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <!-- Continue Shopping -->
@@ -162,21 +111,21 @@
 
                         <div class="space-y-4 mb-6">
                             <div class="flex justify-between">
-                                <span class="text-gray-600">Subtotal (3 items)</span>
-                                <span class="font-medium">$59.97</span>
+                                <span class="text-gray-600">Subtotal ({{ $cart->count() }} item(s))</span>
+                                <span class="font-medium">{{ $subtotal }}€</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Shipping</span>
-                                <span class="font-medium text-green-600">Free</span>
+                                <span class="font-medium text-green-600">9.99€</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Tax</span>
-                                <span class="font-medium">$4.80</span>
+                                <span class="font-medium">4.80€</span>
                             </div>
                             <div class="border-t border-gray-200 pt-4">
                                 <div class="flex justify-between text-lg font-bold">
                                     <span>Total</span>
-                                    <span>$64.77</span>
+                                    <span>{{ $subtotal + 9.99 + 4.8 }}€</span>
                                 </div>
                             </div>
                         </div>
@@ -201,8 +150,8 @@
                         <!-- Security Notice -->
                         <div class="text-center text-sm text-gray-500">
                             <div class="flex justify-center items-center gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>

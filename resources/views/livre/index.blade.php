@@ -52,12 +52,26 @@
                             <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
                             <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
 
-                            <!-- This will now stick to the bottom -->
                             <div class="flex mt-auto justify-between items-center">
                                 <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
-                                <button class="btn-primary px-4 py-2 rounded text-sm transition-colors">
-                                    Add to Cart
-                                </button>
+                                <!-- If user is authenticated, use form for POST request -->
+                                @auth
+                                    <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        <button type="submit"
+                                            class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                @else
+                                    <!-- If not authenticated, link to login page or show modal -->
+                                    <a href="{{ route('login') }}"
+                                        class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600 inline-block">
+                                        Add to Cart
+                                    </a>
+                                @endauth
+
                             </div>
                         </div>
                     </div>

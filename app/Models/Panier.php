@@ -11,4 +11,17 @@ class Panier extends Model
         'livre_id',
         'quantite',
     ];
+
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the livre (book) that is in the cart.
+     */
+    public function livre()
+    {
+        return $this->belongsTo(Livre::class);
+    }
 }
