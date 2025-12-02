@@ -28,7 +28,7 @@
                     </a>
                     <div class="dropdown-menu">
                         @foreach ($categories as $category)
-                            <a href="" class="dropdown-item">
+                            <a href="{{ route('livresByCategory',$category->id) }}" class="dropdown-item">
                                 {{ $category->nom }}
                             </a>
                         @endforeach
