@@ -32,7 +32,7 @@
                                     class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
                                     <div
                                         class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
-                                        <div class="text-2xl text-white">📖</div>
+                                        <img src="{{ $cartItem->livre->image }}" alt="Image du livre" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-grow">
                                         <div class="flex justify-between">
