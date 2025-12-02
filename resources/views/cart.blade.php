@@ -3,11 +3,12 @@
 @section('title', 'Boutique')
 
 @section('hero-section')
+    <!-- Section Hero : Titre et description de la page panier -->
     <div class="container mx-auto px-4 text-center">
         <h1 class="text-5xl font-bold heading-font text-third mb-6">Your Shopping Cart</h1>
-        <p class="text-xl text-third max-w-2xl mx-auto">Review your selected books and proceed to checkout. Your next great
-            read
-            is just a click away!</p>
+        <p class="text-xl text-third max-w-2xl mx-auto">
+            Review your selected books and proceed to checkout. Your next great read is just a click away!
+        </p>
     </div>
 @endsection
 
@@ -15,29 +16,36 @@
     <!-- Breadcrumb -->
     <x-breadcrumb :items="[['name' => 'Home', 'url' => route('livres.index')], ['name' => 'Cart']]" />
 
+    <!-- Section principale du panier -->
     <section class="py-8 bg-gray-50 min-h-screen">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Cart Items -->
+
+                <!-- Liste des articles du panier -->
                 <div class="lg:w-2/3">
                     <div class="bg-white rounded-lg shadow-lg p-6">
+
+                        <!-- En-tête de la liste des articles -->
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold heading-font">Cart Items</h2>
                             <span class="text-gray-600">{{ $cart->count() }} item(s)</span>
                         </div>
-                        <!-- Cart Items List -->
+
+                        <!-- Liste des articles -->
                         <div class="space-y-6">
-                            <!-- Cart Item 1 -->
                             @foreach ($cart as $cartItem)
+                                <!-- Lien vers la page du livre -->
                                 <a href="{{ route('livres.show', $cartItem->livre->id) }}">
-                                    <div
-                                        class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
-                                        <div
-                                            class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
+                                    <div class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
+
+                                        <!-- Image du livre -->
+                                        <div class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
                                             <img src="{{ $cartItem->livre->image }}" alt="Image du livre"
                                                 class="w-full h-full object-cover">
                                         </div>
                                 </a>
+
+                                <!-- Informations sur le livre : nom, auteur, prix et quantités -->
                                 <div class="flex-grow">
                                     <div class="flex justify-between">
                                         <div>
@@ -48,29 +56,34 @@
                                             <p class="font-bold text-primary text-lg">{{ $cartItem->livre->prix }}€</p>
                                         </div>
                                     </div>
+
+                                    <!-- Contrôle de la quantité et suppression du produit -->
                                     <div class="flex items-center justify-between mt-4">
+
+                                        <!-- Contrôles de quantité -->
                                         <div class="flex items-center gap-3">
                                             <span class="text-gray-600">Quantité : </span>
                                             <div class="flex items-center border border-gray-300 rounded">
-                                                <form method="POST" action="{{ route('panier.decrement', $cartItem->id) }}"
-                                                    class="inline">
+
+                                                <!-- Décrémenter la quantité -->
+                                                <form method="POST" action="{{ route('panier.decrement', $cartItem->id) }}" class="inline">
                                                     @csrf
-                                                    <button type="submit"
-                                                        class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                                    <button type="submit" class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
                                                 </form>
 
+                                                <!-- Affichage de la quantité actuelle -->
                                                 <span class="quantity-input px-3 py-1">{{ $cartItem->quantite }}</span>
 
-                                                <form method="POST" action="{{ route('panier.increment', $cartItem->id) }}"
-                                                    class="inline">
+                                                <!-- Incrémenter la quantité -->
+                                                <form method="POST" action="{{ route('panier.increment', $cartItem->id) }}" class="inline">
                                                     @csrf
-                                                    <button type="submit"
-                                                        class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                                    <button type="submit" class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
                                                 </form>
                                             </div>
                                         </div>
-                                        <form method="POST" action="{{ route('panier.destroy', $cartItem->id) }}"
-                                            class="inline"
+
+                                        <!-- Bouton pour supprimer l'article du panier -->
+                                        <form method="POST" action="{{ route('panier.destroy', $cartItem->id) }}" class="inline"
                                             onsubmit="return confirm('Are you sure you want to remove this item?');">
                                             @csrf
                                             @method('DELETE')
@@ -90,7 +103,7 @@
                         @endforeach
                     </div>
 
-                    <!-- Continue Shopping -->
+                    <!-- Bouton continuer les achats -->
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <a href="{{ route('livres') }}"
                             class="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors">
@@ -105,11 +118,12 @@
                 </div>
             </div>
 
-            <!-- Order Summary -->
+            <!-- Résumé de la commande -->
             <div class="lg:w-1/3">
                 <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
                     <h2 class="text-2xl font-bold heading-font mb-6">Order Summary</h2>
 
+                    <!-- Détails de la commande : sous-total, frais, taxes, total -->
                     <div class="space-y-4 mb-6">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Subtotal ({{ $cart->count() }} item(s))</span>
@@ -131,7 +145,7 @@
                         </div>
                     </div>
 
-                    <!-- Promo Code -->
+                    <!-- Code promo -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2">Promo Code</label>
                         <div class="flex gap-2">
@@ -143,14 +157,14 @@
                         </div>
                     </div>
 
-                    <!-- Checkout Button -->
+                    <!-- Bouton de validation de commande -->
                     <a href="{{ route('command') }}">
                         <button class="w-full btn-primary py-3 rounded-lg font-medium text-lg transition-colors mb-4">
                             Proceed to Checkout
                         </button>
                     </a>
 
-                    <!-- Security Notice -->
+                    <!-- Message de sécurité -->
                     <div class="text-center text-sm text-gray-500">
                         <div class="flex justify-center items-center gap-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -164,10 +178,12 @@
                     </div>
                 </div>
 
-                <!-- Support Section -->
+                <!-- Section Support -->
                 <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
                     <h3 class="font-bold text-lg mb-4">Need Help?</h3>
                     <div class="space-y-3">
+
+                        <!-- Contact support téléphonique -->
                         <div class="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -176,6 +192,8 @@
                             </svg>
                             <span>Contact Support: (555) 123-4567</span>
                         </div>
+
+                        <!-- Live chat -->
                         <div class="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -184,6 +202,7 @@
                             </svg>
                             <span>Live Chat Available</span>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -3,15 +3,21 @@
 @section('title', 'Order Confirmation')
 
 @section('hero-section')
-    <!-- Animated Checkmark -->
+    <!-- Section Hero : Affiche une animation de checkmark indiquant que la commande est confirmée -->
     <svg class="checkmark mb-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
         <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
         <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
     </svg>
 
+    <!-- Titre principal de confirmation -->
     <h1 class="text-5xl font-bold heading-font text-third mb-4">Order Confirmed!</h1>
-    <p class="text-xl text-third max-w-2xl mx-auto mb-6">Thank you for your purchase. Your order has been successfully placed and is being processed.</p>
 
+    <!-- Message de remerciement et confirmation -->
+    <p class="text-xl text-third max-w-2xl mx-auto mb-6">
+        Thank you for your purchase. Your order has been successfully placed and is being processed.
+    </p>
+
+    <!-- Statut de la commande et numéro de commande -->
     <div class="inline-flex items-center gap-4">
         <span class="order-status order-status-processing">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,26 +30,28 @@
 @endsection
 
 @section('content')
-    <!-- Breadcrumb -->
+    <!-- Breadcrumb pour la navigation : Home > Order -->
     <x-breadcrumb :items="[['name' => 'Home', 'url' => route('livres.index')], ['name' => 'Order']]" />
 
-    <!-- Order Details Section -->
+    <!-- Section principale avec détails de la commande -->
     <section class="py-8 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Order Summary -->
+
+                <!-- Détails des articles de la commande -->
                 <div class="lg:col-span-2">
                     <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                         <h2 class="text-2xl font-bold heading-font mb-6">Order Details</h2>
 
-                        <!-- Order Items -->
+                        <!-- Liste des articles commandés -->
                         <div class="space-y-6 mb-8">
                             @foreach ($command->ligne as $ligne)
-                                <!-- Order Item -->
                                 <div class="flex flex-col sm:flex-row gap-4 p-4 border border-gray-200 rounded-lg">
+                                    <!-- Image du livre -->
                                     <div class="w-20 h-28 primary-color rounded flex items-center justify-center flex-shrink-0">
                                         <img src="{{ $ligne->livre->image }}" alt="">
                                     </div>
+                                    <!-- Informations sur le livre : titre, auteur, prix, quantité -->
                                     <div class="flex-grow">
                                         <div class="flex justify-between">
                                             <div>
@@ -60,10 +68,11 @@
                             @endforeach
                         </div>
 
-                        <!-- Order Timeline -->
+                        <!-- Timeline de la commande avec étapes et icônes -->
                         <div>
                             <h3 class="font-bold text-lg mb-4">Order Timeline</h3>
                             <div class="space-y-4">
+                                <!-- Étape 1 : Commande passée -->
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,6 +85,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Étape 2 : En traitement -->
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,6 +98,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Étape 3 : Expédié -->
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,6 +111,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Étape 4 : Livré -->
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,11 +128,13 @@
                     </div>
                 </div>
 
-                <!-- Order Information & Actions -->
+                <!-- Carte de résumé de la commande et actions -->
                 <div class="space-y-6">
-                    <!-- Order Summary Card -->
+                    <!-- Carte récapitulative -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="font-bold text-lg mb-4">Order Summary</h3>
+
+                        <!-- Sous-total, shipping, taxes et total -->
                         <div class="space-y-3 mb-6">
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Subtotal ({{ $command->ligne->sum('quantite') }} item(s))</span>
@@ -142,6 +156,7 @@
                             </div>
                         </div>
 
+                        <!-- Méthode de paiement et shipping -->
                         <div class="space-y-3">
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Payment Method</span>
@@ -154,7 +169,7 @@
                         </div>
                     </div>
 
-                    <!-- Shipping Information -->
+                    <!-- Informations d’expédition -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="font-bold text-lg mb-4">Shipping Information</h3>
                         <div class="space-y-2">
@@ -167,7 +182,7 @@
                         </div>
                     </div>
 
-                    <!-- Order Actions -->
+                    <!-- Actions de la commande : téléchargement facture, contact support, suivi -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="font-bold text-lg mb-4">Order Actions</h3>
                         <div class="space-y-3">
@@ -191,7 +206,7 @@
                 </div>
             </div>
 
-            <!-- Continue Shopping -->
+            <!-- Bouton pour continuer les achats -->
             <div class="text-center mt-8">
                 <a href="{{ route('livres.index') }}" class="btn-primary inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium text-lg transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

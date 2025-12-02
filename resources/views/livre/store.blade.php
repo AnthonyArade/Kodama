@@ -3,40 +3,47 @@
 @section('title', 'Boutique')
 
 @section('hero-section')
+    <!-- Section Hero : Titre et description de la page boutique -->
     <h1 class="text-4xl font-bold heading-font text-third text-center mb-4">Our Book Collection</h1>
-    <p class="text-xl text-third text-center max-w-3xl mx-auto">Discover thousands of books across all genres. Find your next
-        great read in our carefully curated collection.</p>
+    <p class="text-xl text-third text-center max-w-3xl mx-auto">
+        Discover thousands of books across all genres. Find your next great read in our carefully curated collection.
+    </p>
 @endsection
 
 @section('content')
     <!-- Breadcrumb -->
     @php
+        // Initialisation des items du breadcrumb : Home > Books
         $breadcrumbItems = [['name' => 'Home', 'url' => route('livres.index')], ['name' => 'Books']];
 
+        // Si on est sur une page filtrée par catégorie
         if (Route::is('livresByCategory')) {
-            // Make 'Books' clickable
+            // Rendre 'Books' cliquable
             $breadcrumbItems[1]['url'] = route('livres');
 
-            // Add the category as the last breadcrumb item
+            // Ajouter le nom de la catégorie actuelle à la fin du breadcrumb
             $breadcrumbItems[] = ['name' => $livres[0]->category->nom];
         }
     @endphp
 
+    <!-- Affichage du breadcrumb via le composant Blade -->
     <x-breadcrumb :items="$breadcrumbItems" />
 
-    <!-- Main Content -->
+    <!-- Contenu principal -->
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Filters Sidebar -->
-            <!-- Filters Sidebar -->
+
+            <!-- Sidebar des filtres -->
             <div class="lg:w-1/4">
                 <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+
+                    <!-- En-tête des filtres avec bouton Clear All -->
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-bold heading-font">Filters</h2>
                         <button class="text-primary text-sm hover:underline">Clear All</button>
                     </div>
 
-                    <!-- Search -->
+                    <!-- Recherche de livres -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2">Search Books</label>
                         <div class="relative">
@@ -50,7 +57,7 @@
                         </div>
                     </div>
 
-                    <!-- Categories -->
+                    <!-- Liste des catégories avec checkbox -->
                     <div class="mb-6">
                         <h3 class="font-bold mb-3">Categories</h3>
                         <div class="space-y-2">
@@ -63,7 +70,7 @@
                         </div>
                     </div>
 
-                    <!-- Price Range -->
+                    <!-- Filtre par prix -->
                     <div class="mb-6">
                         <h3 class="font-bold mb-3">Price Range</h3>
                         <div class="mb-2">
@@ -76,18 +83,23 @@
                         </div>
                     </div>
 
+                    <!-- Bouton appliquer les filtres -->
                     <button class="w-full btn-primary py-2 rounded-md font-medium transition-colors">
                         Apply Filters
                     </button>
                 </div>
             </div>
 
-            <!-- Books Listing -->
+            <!-- Section liste de livres -->
             <div class="lg:w-3/4">
-                <!-- Sorting and View Options -->
+
+                <!-- Options de tri et de vue -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <!-- Affichage du nombre de résultats -->
                     <p class="text-gray-600 mb-4 md:mb-0">Showing {{ $livres->firstItem() }}-{{ $livres->lastItem() }}
                         of {{ $livres->total() }} results</p>
+
+                    <!-- Contrôle du tri et du type de vue (liste ou grille) -->
                     <div class="flex items-center space-x-4">
                         <div class="flex items-center">
                             <span class="mr-2 text-gray-600">Sort by:</span>
@@ -102,6 +114,7 @@
                             </select>
                         </div>
                         <div class="flex border border-gray-300 rounded-md overflow-hidden">
+                            <!-- Boutons de vue liste/grille -->
                             <button type="button" class="view-toggle p-2 bg-gray-100 border-r border-gray-300"
                                 data-view="list">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -121,11 +134,12 @@
                     </div>
                 </div>
 
-                <!-- Books Grid -->
+                <!-- Grille de livres -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="books-container">
                     @forelse ($livres as $livre)
                         <a href="{{ route('livres.show', $livre->id) }}">
                             <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition-all">
+                                <!-- Image du livre ou icône par défaut si pas d'image -->
                                 <div class="h-48 primary-color flex items-center justify-center relative overflow-hidden">
                                     @if ($livre->image)
                                         <img src="{{ $livre->image }}" alt="Image de {{ $livre->nom }}"
@@ -138,6 +152,7 @@
                                     @endif
                                 </div>
 
+                                <!-- Informations du livre : nom, auteur, catégorie, likes/dislikes -->
                                 <div class="p-4">
                                     <h3 class="font-bold text-lg mb-1">{{ $livre->nom }}</h3>
                                     <p class="text-gray-600 text-sm mb-2">{{ $livre->auteur }}</p>
@@ -148,6 +163,8 @@
                                             </span>
                                         @endif
                                     </div>
+
+                                    <!-- Section likes/dislikes -->
                                     <div class="like-dislike-container">
                                         <div class="like-count">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -165,17 +182,15 @@
                                         </div>
                                     </div>
 
+                                    <!-- Prix et bouton ajouter au panier -->
                                     <div class="flex justify-between items-center mt-3">
                                         <div>
-                                            <span
-                                                class="font-bold text-primary text-lg">${{ number_format($livre->prix, 2) }}</span>
+                                            <span class="font-bold text-primary text-lg">{{ number_format($livre->prix, 2) }}€</span>
                                         </div>
                                         @auth
-                                            <form action="{{ route('panier.store', $livre->id) }}" method="POST"
-                                                class="inline-block">
+                                            <form action="{{ route('panier.store', $livre->id) }}" method="POST" class="inline-block">
                                                 @csrf
-                                                <button
-                                                    class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
+                                                <button class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -184,9 +199,8 @@
                                                 </button>
                                             </form>
                                         @else
-                                            <a href="{{ route('login') }}" class="">
-                                                <button
-                                                    class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
+                                            <a href="{{ route('login') }}">
+                                                <button class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -200,10 +214,10 @@
                             </div>
                         </a>
                     @empty
+                        <!-- Message si aucun livre ne correspond aux filtres -->
                         <div class="col-span-full text-center py-12">
                             <p class="text-gray-500 text-lg">No books found matching your criteria.</p>
-                            <p class="text-primary hover:underline mt-2 inline-block">Clear filters
-                            </p>
+                            <p class="text-primary hover:underline mt-2 inline-block">Clear filters</p>
                         </div>
                     @endforelse
                 </div>
@@ -240,8 +254,7 @@
                                 @if (is_array($element))
                                     @foreach ($element as $page => $url)
                                         @if ($page == $livres->currentPage())
-                                            <span
-                                                class="p-2 px-3 rounded-md border border-gray-300 pagination-active">{{ $page }}</span>
+                                            <span class="p-2 px-3 rounded-md border border-gray-300 pagination-active">{{ $page }}</span>
                                         @else
                                             <a href="{{ $url }}"
                                                 class="p-2 px-3 rounded-md border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
