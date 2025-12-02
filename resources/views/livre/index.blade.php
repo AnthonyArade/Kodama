@@ -9,9 +9,11 @@
             <p class="text-xl text-third mb-8 opacity-90">Kodama brings you a carefully curated collection of books for every
                 reader. Find your next adventure in our forest of stories.</p>
             <div class="flex space-x-4">
-                <button class="btn-primary px-6 py-3 rounded-md font-medium transition-colors">
-                    Browse Collection
-                </button>
+                <a href="{{ route('livres') }}">
+                    <button class="btn-primary px-6 py-3 rounded-md font-medium transition-colors">
+                        Browse Collection
+                    </button>
+                </a>
             </div>
         </div>
         <div class="md:w-1/2 flex justify-center">

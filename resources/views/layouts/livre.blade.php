@@ -13,21 +13,20 @@
 
 <body class="bg-white text-third">
 
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+@if (session('success'))
+    <div class="bg-green-500 text-white p-3 rounded mb-4">
         {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    @endif
+@endif
 
-    @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+@if (session('error'))
+    <div class="bg-red-500 text-white p-3 rounded mb-4">
         {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    @endif
+@endif
 
-    <x-header/>
+
+    <x-header :categories="$categories" />
 
     <section class="secondary-color py-16">
         <div class="container mx-auto px-4">
