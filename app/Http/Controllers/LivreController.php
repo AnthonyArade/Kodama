@@ -27,18 +27,18 @@ class LivreController extends Controller
         return view('livre.store', compact('livres', 'categories'));
     }
 
-    
 
-public function storeByCategory(Category $category)
-{
-    // Récupère les livres par category
-    $livres = Livre::where('category_id', $category->id)->paginate(12);
 
-    // Debug
-    // dd($livres);
+    public function storeByCategory(Category $category)
+    {
+        // Récupère les livres par category
+        $livres = Livre::where('category_id', $category->id)->paginate(12);
 
-    return view('livre.store', compact('livres'));
-}
+        // Debug
+        // dd($livres);
+
+        return view('livre.store', compact('livres'));
+    }
 
 
     /**
@@ -47,13 +47,13 @@ public function storeByCategory(Category $category)
     public function show(string $id)
     {
         $livre = Livre::findOrFail($id);
-        
-        $featuredLivres = Livre::where('category_id', $livre->category_id)
-        ->where('id', '!=', $livre->id)
-        ->inRandomOrder()
-        ->take(4)
-        ->get();
 
-        return view('livre.detail', compact('livre'));
+        $featuredLivres = Livre::where('category_id', $livre->category_id)
+            ->where('id', '!=', $livre->id)
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('livre.detail', compact('livre', 'featuredLivres'));
     }
 }

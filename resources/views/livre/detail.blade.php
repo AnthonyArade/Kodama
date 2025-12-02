@@ -119,15 +119,18 @@
             <h2 class="text-3xl font-bold heading-font text-third text-center mb-8">You Might Also Like</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Related Book 1 -->
+                @foreach ($featuredLivres as $featuredLivre)
+                    
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div class="h-48 secondary-color flex items-center justify-center">
-                        <div class="text-4xl text-third">🌙</div>
+                        <img src="{{ $featuredLivre->image }}" alt="Image du livre" class="w-full h-full object-cover">
+                        
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">Moonlight Sonata</h3>
-                        <p class="text-gray-600 text-sm mb-2">by Michael Chen</p>
+                        <h3 class="font-bold text-lg mb-1">{{$featuredLivre->nom}}</h3>
+                        <p class="text-gray-600 text-sm mb-2">{{$featuredLivre->auteur}}</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-primary">$16.99</span>
+                            <span class="font-bold text-primary">{{$featuredLivre->prix}}</span>
                             <button class="btn-primary p-2 rounded-full transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -136,63 +139,9 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
                 
-                <!-- Related Book 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="h-48 primary-color flex items-center justify-center">
-                        <div class="text-4xl text-white">🚀</div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">Beyond the Stars</h3>
-                        <p class="text-gray-600 text-sm mb-2">by Alex Johnson</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-primary">$22.99</span>
-                            <button class="btn-primary p-2 rounded-full transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 
-                <!-- Related Book 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="h-48 secondary-color flex items-center justify-center">
-                        <div class="text-4xl text-third">🏰</div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">The Castle of Dreams</h3>
-                        <p class="text-gray-600 text-sm mb-2">by Sophia Williams</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-primary">$18.99</span>
-                            <button class="btn-primary p-2 rounded-full transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Related Book 4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="h-48 primary-color flex items-center justify-center">
-                        <div class="text-4xl text-white">🔍</div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">The Silent Witness</h3>
-                        <p class="text-gray-600 text-sm mb-2">by David Miller</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-primary">$20.99</span>
-                            <button class="btn-primary p-2 rounded-full transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
