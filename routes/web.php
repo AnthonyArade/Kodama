@@ -12,6 +12,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 //creer moi une route pour le controller LivreController store method
 Route::get('/store', [LivreController::class, 'store'])->name('livres');
 
+//Affiche les détails d'un livre spécifique
+
+Route::get('/livre/{id}', [LivreController::class, 'show'])->name('livres.show');
+
 Route::get('/store/{category}', [LivreController::class, 'storeByCategory'])->name('livresByCategory');
 
 Route::get('/dashboard', function () {
