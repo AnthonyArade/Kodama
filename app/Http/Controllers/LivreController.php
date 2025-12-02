@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -46,6 +47,6 @@ public function storeByCategory(Category $category)
     public function show(string $id)
     {
         $livre = Livre::findOrFail($id);
-        return view('show', compact('livre'));
+        return view('livre.detail', compact('livre'));
     }
 }
