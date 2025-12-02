@@ -135,10 +135,21 @@
                 <div class="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <!-- Book 1 -->
                     @foreach ($livres as $livre)
-                        <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition-all">
-                            <div class="h-48 primary-color flex items-center justify-center relative">
-                                <div class="text-4xl text-white">📖</div>
-                            </div>
+                    <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition-all">
+                        <div class="h-48 primary-color flex items-center justify-center relative overflow-hidden">
+                            @if($livre->image)
+                                <!-- Affiche l'image si elle existe en base de données -->
+                                <img src="{{ ($livre->image) }}" 
+                                     alt="Image de {{ $livre->nom }}" 
+                                     class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                            @else
+                                <!-- Affiche un placeholder si pas d'image -->
+                                <div class="text-4xl text-white bg-gray-300 w-full h-full flex items-center justify-center">
+                                    📖
+                                </div>
+                            @endif
+                        </div>
+                                
                             <div class="p-4">
                                 <h3 class="font-bold text-lg mb-1">{{ $livre->nom }}</h3>
                                 <p class="text-gray-600 text-sm mb-2">{{ $livre->auteur }}</p>
@@ -155,7 +166,7 @@
                                             <path
                                                 d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" />
                                         </svg>
-                                        <span>{{ $livre->dislike }}</span>
+                                        <span>{{$livre->unlike }}</span>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center">
