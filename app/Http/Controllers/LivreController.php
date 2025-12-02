@@ -47,6 +47,13 @@ public function storeByCategory(Category $category)
     public function show(string $id)
     {
         $livre = Livre::findOrFail($id);
+        
+        $featuredLivres = Livre::where('category_id', $livre->category_id)
+        ->where('id', '!=', $livre->id)
+        ->inRandomOrder()
+        ->take(4)
+        ->get();
+
         return view('livre.detail', compact('livre'));
     }
 }
