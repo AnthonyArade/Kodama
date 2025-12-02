@@ -65,7 +65,7 @@ class LivreController extends Controller
         $livres     = $query->paginate(12);
         $categories = Category::all();
 
-        return view('store', compact('livres', 'categories'));
+        return view('livre.store', compact('livres', 'categories'));
     }
 
     public function byCategory($category)

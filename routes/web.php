@@ -12,7 +12,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 //creer moi une route pour le controller LivreController store method
 Route::get('/store', [LivreController::class, 'store'])->name('livres');
 
-
+Route::get('/store/{category}', [LivreController::class, 'storeByCategory'])->name('livresByCategory');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
