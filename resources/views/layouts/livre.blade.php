@@ -29,7 +29,7 @@
     <x-header :categories="$categories" />
 
     <section class="secondary-color py-16">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 text-center">
             @yield('hero-section')
         </div>
     </section>

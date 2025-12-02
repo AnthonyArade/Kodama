@@ -89,11 +89,13 @@
                 organized by genre</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach ($categories as $category)
+                <a href="{{ route('livresByCategory',$category->id) }}">
                     <div
-                        class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-white transition-colors cursor-pointer">
+                        class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-green-700 transition-colors cursor-pointer">
                         <div class="text-3xl mb-3">{{ $category->icon }}</div>
                         <h3 class="font-bold">{{ $category->nom }}</h3>
                     </div>
+                </a>
                 @endforeach
             </div>
         </div>

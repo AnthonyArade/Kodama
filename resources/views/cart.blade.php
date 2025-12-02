@@ -13,7 +13,8 @@
 
 @section('content')
     <!-- Breadcrumb -->
-    <x-breadcrumb :items="[['name' => 'Home']]" />
+    <x-breadcrumb :items="[['name' => 'Home', 'url' => route('livres.index')],['name' => 'Cart']]" />
+         
     <section class="py-8 bg-gray-50 min-h-screen">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row gap-8">
@@ -91,7 +92,7 @@
 
                         <!-- Continue Shopping -->
                         <div class="mt-8 pt-6 border-t border-gray-200">
-                            <a href="#"
+                            <a href="{{ route('livres') }}"
                                 class="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -143,9 +144,11 @@
                         </div>
 
                         <!-- Checkout Button -->
+                        <a href="{{ route('command') }}" >
                         <button class="w-full btn-primary py-3 rounded-lg font-medium text-lg transition-colors mb-4">
                             Proceed to Checkout
                         </button>
+                        </a>
 
                         <!-- Security Notice -->
                         <div class="text-center text-sm text-gray-500">

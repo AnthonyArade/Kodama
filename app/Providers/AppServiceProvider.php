@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Providers;
 
-use App\Models\User;
-use App\Models\Panier;
 use App\Models\Category;
+use App\Models\Panier;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,24 +24,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer('*', function ($view) {
 
-            View::composer('*', function ($view) {
+            $userId = Auth::id();
 
-        $userId = Auth::id();
+            // Only load cart if user is logged in
+            $cart = $userId
+                ? Panier::where('user_id', $userId)->get()
+                : collect();
 
-        // Only load cart if user is logged in
-        $cart = $userId
-            ? Panier::where('user_id', $userId)->get()
-            : collect();
-
-        $view->with('cart', $cart);
-    });
+            $view->with('cart', $cart);
+        });
 
         View::share('categories', Category::all());
-        
-        
+
         Gate::define('access-admin', function (User $user) {
             return $user->is_admin == 1; // true if role = admin or super_admin
         });
+
+        Gate::define('access-order', function ($user, $commande) {
+            return $user->id == $commande;
+        });
+
     }
 }

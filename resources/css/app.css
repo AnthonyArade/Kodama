@@ -10,7 +10,7 @@ body {
     font-family: 'Playfair Display', serif;
 }
 
-/* Custom colors based on your hex codes */
+/* Custom colors */
 .primary-color {
     background-color: #488253;
 }
@@ -47,7 +47,7 @@ body {
     border-color: #193026;
 }
 
-/* Kodama logo styling - tree spirit concept */
+/* Kodama logo styling */
 .kodama-logo {
     position: relative;
     display: inline-block;
@@ -86,10 +86,11 @@ body {
     right: -3px;
 }
 
-/* Custom button styles */
+/* Buttons */
 .btn-primary {
     background-color: #488253;
     color: white;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -122,39 +123,6 @@ body {
     color: #6b7280;
 }
 
-/* Quantity input styling */
-.quantity-input {
-    width: 60px;
-    text-align: center;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    padding: 4px 8px;
-}
-
-/* Cart item hover effect */
-.cart-item:hover {
-    background-color: #f9fafb;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.mobile-dropdown {
-    position: relative;
-}
-
-.dropdown button {
-    cursor: pointer;
-}
-
-.mobile-dropdown button {
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-}
-
-
 /* Dropdown menu styling */
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -167,7 +135,8 @@ body {
     left: 0;
     background: white;
     min-width: 200px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     z-index: 50;
     padding: 8px 0;
@@ -187,7 +156,6 @@ body {
     color: #488253;
 }
 
-/* Cart badge styling */
 .cart-badge {
     position: absolute;
     top: -8px;
@@ -218,6 +186,111 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+
+
+/* Hover effects */
+.book-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* Checkbox styling */
+input[type="checkbox"]:checked {
+    background-color: #488253;
+    border-color: #488253;
+}
+
+/* Price range slider */
+input[type="range"]::-webkit-slider-thumb {
+    background: #488253;
+}
+
+input[type="range"]::-moz-range-thumb {
+    background: #488253;
+}
+
+/* Pagination */
+.pagination-active {
+    background-color: #488253;
+    color: white;
+}
+
+/* Like/Dislike styling */
+.like-dislike-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.like-count,
+.dislike-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+}
+
+.like-count {
+    color: #488253;
+}
+
+.dislike-count {
+    color: #dc2626;
+}
+
+.like-count svg,
+.dislike-count svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Order status indicator */
+.order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.order-status-processing {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Checkmark animation */
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #488253;
+    stroke-miterlimit: 10;
+    margin: 0 auto;
+    box-shadow: inset 0px 0px 0px #488253;
+    animation: fill .4s ease-in-out .4s forwards,
+        scale .3s ease-in-out .9s both;
+}
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #488253;
+    fill: none;
+    animation: stroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke .3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards;
 }
 
 /* Mobile menu styles */
@@ -265,7 +338,7 @@ body {
     width: 24px;
     height: 24px;
     cursor: pointer;
-        position: relative;
+    position: relative;
     z-index: 40;
 }
 
@@ -299,155 +372,29 @@ body {
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
-body {
-    font-family: 'Inter', sans-serif;
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
 
-.heading-font {
-    font-family: 'Playfair Display', serif;
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
 }
 
-/* Custom colors based on your hex codes */
-.primary-color { background-color: #488253; }
-.secondary-color { background-color: #F6D199; }
-.third-color { background-color: #193026; }
-
-.text-primary { color: #488253; }
-.text-secondary { color: #F6D199; }
-.text-third { color: #193026; }
-
-.border-primary { border-color: #488253; }
-.border-secondary { border-color: #F6D199; }
-.border-third { border-color: #193026; }
-
-/* Kodama logo styling - tree spirit concept */
-.kodama-logo {
-    position: relative;
-    display: inline-block;
-}
-
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    background: #488253;
-    border-radius: 50%;
-    position: relative;
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.logo-icon::before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #F6D199;
-    border-radius: 50%;
-    top: -5px;
-    left: -5px;
-}
-
-.logo-icon::after {
-    content: "";
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: #193026;
-    border-radius: 50%;
-    bottom: -3px;
-    right: -3px;
-}
-
-/* Hover effects */
-.book-card:hover {
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-}
-
-/* Custom button styles */
-.btn-primary {
-    background-color: #488253;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #3a6a43;
-}
-
-.btn-secondary {
-    background-color: #F6D199;
-    color: #193026;
-}
-
-.btn-secondary:hover {
-    background-color: #f0c07c;
-}
-
-.btn-outline {
-    border: 2px solid #193026;
-    color: #193026;
-}
-
-.btn-outline:hover {
-    background-color: #193026;
-    color: white;
-}
-
-/* Breadcrumb styling */
-.breadcrumb-item:not(:last-child):after {
-    content: ">";
-    margin: 0 8px;
-    color: #6b7280;
-}
-
-/* Checkbox styling */
-input[type="checkbox"]:checked {
-    background-color: #488253;
-    border-color: #488253;
-}
-
-/* Price range slider */
-input[type="range"]::-webkit-slider-thumb {
-    background: #488253;
-}
-
-input[type="range"]::-moz-range-thumb {
-    background: #488253;
-}
-
-/* Pagination */
-.pagination-active {
-    background-color: #488253;
-    color: white;
-}
-
-/* Like/Dislike styling */
-.like-dislike-container {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.like-count, .dislike-count {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.875rem;
-    color: #6b7280;
-}
-
-.like-count svg, .dislike-count svg {
-    width: 16px;
-    height: 16px;
-}
-
-.like-count {
-    color: #488253;
-}
-
-.dislike-count {
-    color: #dc2626;
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 40px #488253;
+    }
 }
 
 /* Media query for mobile menu */
@@ -481,6 +428,7 @@ input[type="range"]::-moz-range-thumb {
     }
 }
 
+/* Miscellaneous */
 .rotate-180 {
     transform: rotate(180deg);
 }

@@ -29,7 +29,7 @@
                     <div class="dropdown-menu">
                         @foreach ($categories as $category)
                             <a href="{{ route('livresByCategory',$category->id) }}" class="dropdown-item">
-                                {{ $category->nom }}
+                                {{ $category->icon }} - {{ $category->nom }}
                             </a>
                         @endforeach
                     </div>

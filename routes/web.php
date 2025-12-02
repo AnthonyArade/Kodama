@@ -1,23 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 //creer moi une route pour le controller LivreController index method
 Route::get('/', [LivreController::class, 'index'])->name('livres.index');
-
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 //creer moi une route pour le controller LivreController store method
 Route::get('/store', [LivreController::class, 'store'])->name('livres');
-
 Route::get('/store/category/{category}', [LivreController::class, 'storeByCategory'])->name('livresByCategory');
 //Affiche les détails d'un livre spécifique
-
 Route::get('/livre/{id}', [LivreController::class, 'show'])->name('livres.show');
-
-Route::get('/store/{category}', [LivreController::class, 'storeByCategory'])->name('livresByCategory');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/panier/{id}/increment', [CartController::class, 'increment'])->name('panier.increment');
     Route::post('/panier/{id}/decrement', [CartController::class, 'decrement'])->name('panier.decrement');
     Route::delete('/panier/{id}', [CartController::class, 'destroy'])->name('panier.destroy');
+    Route::get('/command', [CartController::class, 'command'])->name('command');
+    Route::get('order/{id}', [CartController::class, 'order'])->name('order');
 });
 
 require __DIR__ . '/auth.php';
