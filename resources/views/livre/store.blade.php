@@ -54,11 +54,11 @@
                     <div class="mb-6">
                         <h3 class="font-bold mb-3">Categories</h3>
                         <div class="space-y-2">
-                            @foreach ($categories as $category )
-                            <label class="flex items-center">
-                                <input type="checkbox" class="rounded text-primary focus:ring-primary">
-                                <span class="ml-2">{{$category->icon}} - {{  $category->nom }}</span>
-                            </label>
+                            @foreach ($categories as $category)
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                                    <span class="ml-2">{{ $category->icon }} - {{ $category->nom }}</span>
+                                </label>
                             @endforeach
                         </div>
                     </div>
@@ -124,77 +124,81 @@
                 <!-- Books Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="books-container">
                     @forelse ($livres as $livre)
-                        <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition-all">
-                            <div class="h-48 primary-color flex items-center justify-center relative overflow-hidden">
-                                @if ($livre->image)
-                                    <img src="{{ $livre->image }}" alt="Image de {{ $livre->nom }}"
-                                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                                @else
-                                    <div
-                                        class="text-4xl text-white bg-gray-300 w-full h-full flex items-center justify-center">
-                                        📖
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg mb-1">{{ $livre->nom }}</h3>
-                                <p class="text-gray-600 text-sm mb-2">{{ $livre->auteur }}</p>
-                                <div class="flex items-center mb-2">
-                                    @if ($livre->categorie)
-                                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
-                                            {{ $livre->categorie->nom }}
-                                        </span>
+                        <a href="{{ route('livres.show', $livre->id) }}">
+                            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition-all">
+                                <div class="h-48 primary-color flex items-center justify-center relative overflow-hidden">
+                                    @if ($livre->image)
+                                        <img src="{{ $livre->image }}" alt="Image de {{ $livre->nom }}"
+                                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                                    @else
+                                        <div
+                                            class="text-4xl text-white bg-gray-300 w-full h-full flex items-center justify-center">
+                                            📖
+                                        </div>
                                     @endif
                                 </div>
-                                <div class="like-dislike-container">
-                                    <div class="like-count">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z" />
-                                        </svg>
-                                        <span>{{ $livre->like ?? 0 }}</span>
-                                    </div>
-                                    <div class="dislike-count">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" />
-                                        </svg>
-                                        <span>{{ $livre->unlike ?? 0 }}</span>
-                                    </div>
-                                </div>
 
-                                <div class="flex justify-between items-center mt-3">
-                                    <div>
-                                        <span
-                                            class="font-bold text-primary text-lg">${{ number_format($livre->prix, 2) }}</span>
+                                <div class="p-4">
+                                    <h3 class="font-bold text-lg mb-1">{{ $livre->nom }}</h3>
+                                    <p class="text-gray-600 text-sm mb-2">{{ $livre->auteur }}</p>
+                                    <div class="flex items-center mb-2">
+                                        @if ($livre->categorie)
+                                            <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                                                {{ $livre->categorie->nom }}
+                                            </span>
+                                        @endif
                                     </div>
-                                    @auth
-                                        <form action="{{ route('panier.store', $livre->id) }}" method="POST"
-                                            class="inline-block">
-                                            @csrf
-                                            <button class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <a href="{{ route('login') }}" class="">
-                                            <button class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                                </svg>
-                                            </button>
-                                        </a>
-                                    @endauth
+                                    <div class="like-dislike-container">
+                                        <div class="like-count">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z" />
+                                            </svg>
+                                            <span>{{ $livre->like ?? 0 }}</span>
+                                        </div>
+                                        <div class="dislike-count">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" />
+                                            </svg>
+                                            <span>{{ $livre->unlike ?? 0 }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between items-center mt-3">
+                                        <div>
+                                            <span
+                                                class="font-bold text-primary text-lg">${{ number_format($livre->prix, 2) }}</span>
+                                        </div>
+                                        @auth
+                                            <form action="{{ route('panier.store', $livre->id) }}" method="POST"
+                                                class="inline-block">
+                                                @csrf
+                                                <button
+                                                    class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('login') }}" class="">
+                                                <button
+                                                    class="btn-primary p-2 hover:bg-blue-600 rounded-full transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                    </svg>
+                                                </button>
+                                            </a>
+                                        @endauth
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @empty
                         <div class="col-span-full text-center py-12">
                             <p class="text-gray-500 text-lg">No books found matching your criteria.</p>

@@ -45,38 +45,41 @@
                 <!-- Book Card 1 -->
                 {{-- creer moi une boucle foreach pour afficher les featuredcard --}}
                 @foreach ($featuredLivres as $featuredLivre)
-                    <div
-                        class="book-card flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-all h-full">
-                        <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
-                            <img src="{{ $featuredLivre->image }}" alt="Image du livre" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
-                            <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
+                    <a href="{{ route('livres.show', $featuredLivre->id) }}">
+                        <div
+                            class="book-card flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-all h-full">
+                            <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
+                                <img src="{{ $featuredLivre->image }}" alt="Image du livre"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 flex flex-col flex-1">
+                                <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
+                                <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
 
-                            <div class="flex mt-auto justify-between items-center">
-                                <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
-                                <!-- If user is authenticated, use form for POST request -->
-                                @auth
-                                    <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST"
-                                        class="inline-block">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
+                                <div class="flex mt-auto justify-between items-center">
+                                    <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
+                                    <!-- If user is authenticated, use form for POST request -->
+                                    @auth
+                                        <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            <button type="submit"
+                                                class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
+                                                Add to Cart
+                                            </button>
+                                        </form>
+                                    @else
+                                        <!-- If not authenticated, link to login page or show modal -->
+                                        <a href="{{ route('login') }}"
+                                            class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600 inline-block">
                                             Add to Cart
-                                        </button>
-                                    </form>
-                                @else
-                                    <!-- If not authenticated, link to login page or show modal -->
-                                    <a href="{{ route('login') }}"
-                                        class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600 inline-block">
-                                        Add to Cart
-                                    </a>
-                                @endauth
+                                        </a>
+                                    @endauth
 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -89,13 +92,13 @@
                 organized by genre</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach ($categories as $category)
-                <a href="{{ route('livresByCategory',$category->id) }}">
-                    <div
-                        class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-green-700 transition-colors cursor-pointer">
-                        <div class="text-3xl mb-3">{{ $category->icon }}</div>
-                        <h3 class="font-bold">{{ $category->nom }}</h3>
-                    </div>
-                </a>
+                    <a href="{{ route('livresByCategory', $category->id) }}">
+                        <div
+                            class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-green-700 transition-colors cursor-pointer">
+                            <div class="text-3xl mb-3">{{ $category->icon }}</div>
+                            <h3 class="font-bold">{{ $category->nom }}</h3>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </div>
