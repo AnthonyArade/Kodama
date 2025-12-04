@@ -15,7 +15,8 @@
             </h1>
             <!-- Description -->
             <p class="text-xl text-third mb-8 opacity-90">
-                Kodama brings you a carefully curated collection of books for every reader. Find your next adventure in our forest of stories.
+                Kodama brings you a carefully curated collection of books for every reader. Find your next adventure in our
+                forest of stories.
             </p>
             <!-- Bouton vers la collection complète -->
             <div class="flex space-x-4">
@@ -33,7 +34,8 @@
                 <!-- Carte de fond stylisée avec rotation -->
                 <div class="w-64 h-80 third-color rounded-lg shadow-xl transform rotate-3"></div>
                 <!-- Carte principale contenant le logo et le slogan -->
-                <div class="w-64 h-80 bg-white border-2 border-primary rounded-lg shadow-xl absolute top-4 left-4 transform -rotate-2 flex items-center justify-center">
+                <div
+                    class="w-64 h-80 bg-white border-2 border-primary rounded-lg shadow-xl absolute top-4 left-4 transform -rotate-2 flex items-center justify-center">
                     <div class="text-center p-6">
                         <!-- Logo de l'entreprise -->
                         <img class="w-20 justify-self-center" src="{{ asset('img/logo.png') }}" alt="logo">
@@ -67,41 +69,47 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Boucle sur les livres en vedette -->
                 @foreach ($featuredLivres as $featuredLivre)
-                    <a href="{{ route('livres.show', $featuredLivre->id) }}">
-                        <div class="book-card flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-all h-full">
-                            <!-- Image du livre -->
-                            <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
-                                <img src="{{ $featuredLivre->image }}" alt="Image du livre" class="w-full h-full object-cover">
-                            </div>
-                            <!-- Informations sur le livre -->
-                            <div class="p-6 flex flex-col flex-1">
-                                <!-- Nom du livre -->
-                                <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
-                                <!-- Description courte -->
-                                <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
+                    <div
+                        class="book-card flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-all h-full">
 
-                                <!-- Prix et bouton d'ajout au panier -->
-                                <div class="flex mt-auto justify-between items-center">
-                                    <!-- Prix -->
-                                    <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
-                                    <!-- Formulaire d'ajout au panier si utilisateur authentifié -->
-                                    @auth
-                                        <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            <button type="submit" class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
-                                                Add to Cart
-                                            </button>
-                                        </form>
-                                    @else
-                                        <!-- Sinon redirection vers la page de connexion -->
-                                        <a href="{{ route('login') }}" class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600 inline-block">
-                                            Add to Cart
-                                        </a>
-                                    @endauth
-                                </div>
+                        <!-- Clickable image and title -->
+                        <a href="{{ route('livres.show', $featuredLivre->id) }}">
+                            <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
+                                <img src="{{ $featuredLivre->image }}" alt="Image du livre"
+                                    class="w-full h-full object-cover">
                             </div>
+                        </a>
+
+                        <div class="p-6 flex flex-col flex-1">
+
+                            <a href="{{ route('livres.show', $featuredLivre->id) }}">
+                                <h3 class="font-bold text-lg mb-2">{{ $featuredLivre->nom }}</h3>
+                            </a>
+
+                            <p class="text-gray-600 text-sm mb-4">{{ $featuredLivre->description }}</p>
+
+                            <div class="flex mt-auto justify-between items-center">
+                                <span class="font-bold text-primary">{{ $featuredLivre->prix }}€</span>
+
+                                @auth
+                                    <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}"
+                                        class="btn-primary px-4 py-2 rounded text-sm transition-colors hover:bg-blue-600">
+                                        Add to Cart
+                                    </a>
+                                @endauth
+                            </div>
+
                         </div>
-                    </a>
+
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -123,7 +131,8 @@
                 <!-- Boucle sur chaque catégorie -->
                 @foreach ($categories as $category)
                     <a href="{{ route('livresByCategory', $category->id) }}">
-                        <div class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-green-700 transition-colors cursor-pointer">
+                        <div
+                            class="bg-secondary-color p-6 rounded-lg text-center hover:bg-primary hover:text-green-700 transition-colors cursor-pointer">
                             <!-- Icône de la catégorie -->
                             <div class="text-3xl mb-3">{{ $category->icon }}</div>
                             <!-- Nom de la catégorie -->

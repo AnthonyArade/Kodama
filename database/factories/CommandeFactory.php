@@ -19,6 +19,7 @@ class CommandeFactory extends Factory
         return [
             'user_id' => null, // set in seeder
             'total' => 0,      // will update later based on ligne de commande
+            'shipped' => false, // set in seeder
             'created_at' => now(),
             'updated_at' => now(),
         ];

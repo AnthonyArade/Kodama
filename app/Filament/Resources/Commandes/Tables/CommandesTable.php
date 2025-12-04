@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\Commandes\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 
 class CommandesTable
 {
@@ -15,12 +16,14 @@ class CommandesTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
+                TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
                     ->numeric()
                     ->sortable(),
+                IconColumn::make('shipped')
+                    ->boolean(),    
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

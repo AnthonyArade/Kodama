@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Commandes\Schemas;
 
-use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\TextEntry;
 
 class CommandeInfolist
 {
@@ -15,6 +16,8 @@ class CommandeInfolist
                     ->numeric(),
                 TextEntry::make('total')
                     ->numeric(),
+                IconEntry::make('shipped')
+                    ->boolean(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

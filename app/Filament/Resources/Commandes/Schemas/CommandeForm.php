@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Commandes\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\TextInput;
 
 class CommandeForm
 {
@@ -17,6 +18,8 @@ class CommandeForm
                 TextInput::make('total')
                     ->required()
                     ->numeric(),
+                    Toggle::make('shipped')
+                    ->required(),
             ]);
     }
 }

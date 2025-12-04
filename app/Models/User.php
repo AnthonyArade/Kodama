@@ -60,6 +60,7 @@ class User extends Authenticatable implements FilamentUser
         // Allow other panels by default (adjust as needed)
         return true;
     }
+    
     public function commande()
     {
         return $this->belongsTo(Commande::class);

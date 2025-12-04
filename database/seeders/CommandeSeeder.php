@@ -17,18 +17,21 @@ class CommandeSeeder extends Seeder
     public function run()
     {
         $books = Livre::all();
+        
 
         User::all()->each(function ($user) use ($books) {
             for ($i = 0; $i < 3; $i++) {
                 // Create a commande for the user
                 $commande = Commande::factory()->create([
                     'user_id' => $user->id,
+                    'shipped' => true,
                 ]);
 
                 // Select random number of books between 1 and 10
                 $selectedBooks = $books->random(rand(1, 5));
 
                 $total = 0;
+                
 
                 foreach ($selectedBooks as $book) {
                     $quantity = rand(1, 5); // random quantity
