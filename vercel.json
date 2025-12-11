@@ -2,12 +2,15 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "public",
   "functions": {
-    "public/index.php": {
+    "api/lambda.php": {
       "runtime": "vercel-php@0.7.4"
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/lambda.php" }
+    {
+      "source": "/(.*)",
+      "destination": "/api/lambda.php"
+    }
   ],
-  "buildCommand": "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+"buildCommand": "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache"
 }
