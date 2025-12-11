@@ -12,6 +12,5 @@
       "destination": "/api/lambda.php"
     }
   ],
-"framework": "laravel",
   "buildCommand": "php artisan migrate --force && php artisan db:seed --class=DatabaseSeeder --force"
 }
