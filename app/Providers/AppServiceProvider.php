@@ -24,19 +24,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // View::composer('*', function ($view) {
+        View::composer('*', function ($view) {
 
-        //     $userId = Auth::id();
+            $userId = Auth::id();
 
-        //     // Only load cart if user is logged in
-        //     $cart = $userId
-        //         ? Panier::where('user_id', $userId)->get()
-        //         : collect();
+            // Only load cart if user is logged in
+            $cart = $userId
+                ? Panier::where('user_id', $userId)->get()
+                : collect();
 
-        //     $view->with('cart', $cart);
-        // });
+            $view->with('cart', $cart);
+        });
 
-        // View::share('categories', Category::all());
+        View::share('categories', Category::all());
 
         Gate::define('access-admin', function (User $user) {
             return $user->is_admin == 1; // true if role = admin or super_admin
