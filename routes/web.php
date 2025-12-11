@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/run-migrate', function (Request $request) {
-    abort_unless($request->query('key') === env('DEPLOY_KEY'), 403);
-
     Artisan::call('migrate:fresh', ['--force' => true]);
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
 
