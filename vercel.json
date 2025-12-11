@@ -12,5 +12,6 @@
       "destination": "/api/lambda.php"
     }
   ],
-"buildCommand": "composer install --no-dev --optimize-autoloader && php artisan migrate --force && php artisan db:seed --class=DatabaseSeeder --force"
+"framework": "laravel",
+  "buildCommand": "php artisan migrate --force && php artisan db:seed --class=DatabaseSeeder --force"
 }
