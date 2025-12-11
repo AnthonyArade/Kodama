@@ -5,6 +5,16 @@ use App\Http\Controllers\LivreController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/run-migrate', function (Request $request) {
+    abort_unless($request->query('key') === env('DEPLOY_KEY'), 403);
+
+    Artisan::call('migrate:fresh', ['--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+
+    return Artisan::output();
+});
+
 // Route pour afficher la liste des livres (index) via LivreController
 Route::get('/', [LivreController::class, 'index'])->name('livres.index');
 
