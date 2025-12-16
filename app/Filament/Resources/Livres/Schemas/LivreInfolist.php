@@ -18,7 +18,8 @@ class LivreInfolist
                 TextEntry::make('auteur'),
                 TextEntry::make('description')
                     ->columnSpanFull(),
-                ImageEntry::make('image'),
+                ImageEntry::make('image')
+                ->disk('public'),
                 TextEntry::make('prix')
                     ->numeric(),
                 TextEntry::make('date_sortie')

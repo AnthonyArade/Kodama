@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Livre;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class LivreController extends Controller
@@ -32,6 +32,7 @@ class LivreController extends Controller
         $categories     = Category::all();
         $livres         = Livre::all();
         $featuredLivres = Livre::orderBy('date_sortie', 'desc')->take(4)->get();
+        
         return view('livre.index', compact('livres', 'featuredLivres', 'categories'));
     }
 

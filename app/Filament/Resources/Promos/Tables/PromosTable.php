@@ -1,49 +1,33 @@
 <?php
 
-namespace App\Filament\Resources\Livres\Tables;
+namespace App\Filament\Resources\Promos\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class LivresTable
+class PromosTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('category.nom')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('nom')
-                    ->label('Nom du livre')
+                TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('auteur')
+                TextColumn::make('start_date')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('end_date')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('type')
                     ->searchable(),
-                ImageColumn::make('image')
-                ->disk('public'),
-                TextColumn::make('prix')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('date_sortie')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('stock')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('like')
-                    ->numeric()
-                    ->label('Like')
-                    ->sortable(),
-                TextColumn::make('unlike')
-                    ->numeric()
-                    ->label('Dislike')
-                    ->sortable(),
+                IconColumn::make('is_active')
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

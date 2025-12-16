@@ -36,12 +36,20 @@
                             @foreach ($cart as $cartItem)
                                 <!-- Lien vers la page du livre -->
                                 <a href="{{ route('livres.show', $cartItem->livre->id) }}">
-                                    <div class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
+                                    <div
+                                        class="cart-item flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-200 transition-colors">
 
                                         <!-- Image du livre -->
-                                        <div class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
-                                            <img src="{{ $cartItem->livre->image }}" alt="Image du livre"
-                                                class="w-full h-full object-cover">
+                                        <div
+                                            class="w-24 h-32 primary-color rounded flex items-center justify-center flex-shrink-0">
+                                            @if (\Illuminate\Support\Str::startsWith($cartItem->livre->image, 'http'))
+                                                <img class="w-full h-full object-cover" src="{{ $cartItem->livre->image }}"
+                                                    alt="Image">
+                                            @else
+                                                <img class="w-full h-full object-cover"
+                                                    src="{{ Storage::disk('public')->url($cartItem->livre->image) }}"
+                                                    alt="Image">
+                                            @endif
                                         </div>
                                 </a>
 
@@ -66,24 +74,29 @@
                                             <div class="flex items-center border border-gray-300 rounded">
 
                                                 <!-- Décrémenter la quantité -->
-                                                <form method="POST" action="{{ route('panier.decrement', $cartItem->id) }}" class="inline">
+                                                <form method="POST" action="{{ route('panier.decrement', $cartItem->id) }}"
+                                                    class="inline">
                                                     @csrf
-                                                    <button type="submit" class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                                    <button type="submit"
+                                                        class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
                                                 </form>
 
                                                 <!-- Affichage de la quantité actuelle -->
                                                 <span class="quantity-input px-3 py-1">{{ $cartItem->quantite }}</span>
 
                                                 <!-- Incrémenter la quantité -->
-                                                <form method="POST" action="{{ route('panier.increment', $cartItem->id) }}" class="inline">
+                                                <form method="POST" action="{{ route('panier.increment', $cartItem->id) }}"
+                                                    class="inline">
                                                     @csrf
-                                                    <button type="submit" class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                                    <button type="submit"
+                                                        class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
                                                 </form>
                                             </div>
                                         </div>
 
                                         <!-- Bouton pour supprimer l'article du panier -->
-                                        <form method="POST" action="{{ route('panier.destroy', $cartItem->id) }}" class="inline"
+                                        <form method="POST" action="{{ route('panier.destroy', $cartItem->id) }}"
+                                            class="inline"
                                             onsubmit="return confirm('Are you sure you want to remove this item?');">
                                             @csrf
                                             @method('DELETE')

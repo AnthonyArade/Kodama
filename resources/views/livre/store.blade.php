@@ -142,8 +142,14 @@
                             <a href="{{ route('livres.show', $livre->id) }}">
                                 <div class="h-48 primary-color flex items-center justify-center relative overflow-hidden">
                                     @if ($livre->image)
-                                        <img src="{{ $livre->image }}" alt="Image de {{ $livre->nom }}"
-                                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                                        @if (\Illuminate\Support\Str::startsWith($livre->image, 'http'))
+                                            <img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                                src="{{ $livre->image }}" alt="Image de {{ $livre->nom }}">
+                                        @else
+                                            <img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                                src="{{ Storage::disk('public')->url($livre->image) }}"
+                                                alt="Image de {{ $livre->nom }}">
+                                        @endif
                                     @else
                                         <div
                                             class="text-4xl text-white bg-gray-300 w-full h-full flex items-center justify-center">

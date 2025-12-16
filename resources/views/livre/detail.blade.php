@@ -45,7 +45,8 @@
                             <!-- Action Buttons (Add to Cart & Wishlist) -->
                             <div class="flex flex-col w-full gap-3 mb-6">
                                 <!-- Formulaire pour ajouter le livre au panier -->
-                                <form action="{{ route('panier.store', $livre->id) }}" class="w-full flex justify-center" method="POST">
+                                <form action="{{ route('panier.store', $livre->id) }}" class="w-full flex justify-center"
+                                    method="POST">
                                     @csrf
                                     <button
                                         class="btn-primary py-3 rounded-lg font-medium w-full inline-flex items-center justify-center gap-2 transition-colors">
@@ -149,33 +150,40 @@
             <h2 class="text-3xl font-bold heading-font text-third text-center mb-8">You Might Also Like</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach ($featuredLivres as $featuredLivre)
-                <a href="{{ route('livres.show',$featuredLivre->id) }}">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                        <!-- Image du livre -->
-                        <div class="h-48 secondary-color flex items-center justify-center">
-                            <img src="{{ $featuredLivre->image }}" alt="Image du livre" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4">
-                            <!-- Nom et auteur du livre -->
-                            <h3 class="font-bold text-lg mb-1">{{ $featuredLivre->nom }}</h3>
-                            <p class="text-gray-600 text-sm mb-2">{{ $featuredLivre->auteur }}</p>
-                            <!-- Prix et bouton d'ajout au panier -->
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-primary">{{ $featuredLivre->prix }}</span>
-                                <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    <button class="btn-primary p-2 rounded-full transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                        </svg>
-                                    </button>
-                                </form>
+                    <a href="{{ route('livres.show', $featuredLivre->id) }}">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                            <!-- Image du livre -->
+                            <div class="h-48 secondary-color flex items-center justify-center">
+                                @if (\Illuminate\Support\Str::startsWith($featuredLivre->image, 'http'))
+                                    <img class="w-full h-full object-cover" src="{{ $featuredLivre->image }}"
+                                        alt="Image">
+                                @else
+                                    <img class="w-full h-full object-cover"
+                                        src="{{ Storage::disk('public')->url($featuredLivre->image) }}" alt="Image">
+                                @endif
+                            </div>
+                            <div class="p-4">
+                                <!-- Nom et auteur du livre -->
+                                <h3 class="font-bold text-lg mb-1">{{ $featuredLivre->nom }}</h3>
+                                <p class="text-gray-600 text-sm mb-2">{{ $featuredLivre->auteur }}</p>
+                                <!-- Prix et bouton d'ajout au panier -->
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-primary">{{ $featuredLivre->prix }}</span>
+                                    <form action="{{ route('panier.store', $featuredLivre->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        <button class="btn-primary p-2 rounded-full transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @endforeach
             </div>
         </div>

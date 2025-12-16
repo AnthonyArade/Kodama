@@ -32,6 +32,7 @@ class LivreForm
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('image')
+                ->disk('public')
                     ->image()
                     ->required(),
                 TextInput::make('prix')

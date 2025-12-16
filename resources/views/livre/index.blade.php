@@ -75,8 +75,13 @@
                         <!-- Clickable image and title -->
                         <a href="{{ route('livres.show', $featuredLivre->id) }}">
                             <div class="h-64 primary-color flex items-center justify-center overflow-hidden">
-                                <img src="{{ $featuredLivre->image }}" alt="Image du livre"
-                                    class="w-full h-full object-cover">
+                                @if (\Illuminate\Support\Str::startsWith($featuredLivre->image, 'http'))
+                                    <img class="w-full h-full object-cover" src="{{ $featuredLivre->image }}"
+                                        alt="Image">
+                                @else
+                                    <img class="w-full h-full object-cover"
+                                        src="{{ Storage::disk('public')->url($featuredLivre->image) }}" alt="Image">
+                                @endif
                             </div>
                         </a>
 

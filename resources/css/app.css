@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "flowbite/plugin";
 
 body {
     font-family: 'Inter', sans-serif;
@@ -433,4 +434,30 @@ input[type="range"]::-moz-range-thumb {
 /* Miscellaneous */
 .rotate-180 {
     transform: rotate(180deg);
+}
+
+
+.bg-info {
+    background-color: #00A5F4;
+}
+
+.bg-error {
+    background-color: #FA2B36;
+}
+
+.bg-success {
+    background-color: #00C850;
+}
+
+.bg-warning {
+    background-color: #FE6800;
+}
+
+@keyframes slide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-slide {
+  animation: slide 20s linear infinite;
 }

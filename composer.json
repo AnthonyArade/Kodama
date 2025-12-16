@@ -74,7 +74,6 @@
         ],
         "vercel": [
             "php artisan migrate:fresh --force",
-            "@php artisan db:seed --class=DatabaseSeeder --force",
             "npm run build",
             "mkdir -p /vercel/output/static",
             "cp -r public/build /vercel/output/static/"

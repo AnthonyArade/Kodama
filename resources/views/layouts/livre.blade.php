@@ -39,6 +39,8 @@
 <!-- Inclusion du header avec la liste des catégories passée en variable -->
 <x-header :categories="$categories" />
 
+<x-promo-banner/>
+
 <!-- Section héroïque avec couleur secondaire et padding vertical -->
 <section class="secondary-color py-16">
     <div class="container mx-auto px-4 text-center">
